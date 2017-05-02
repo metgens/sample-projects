@@ -45,6 +45,29 @@ namespace Rx.NET_Serial_Port_Example.Tests.SerialPortDeviceTests
 
             }
 
+
+            [Test]
+            public void For2SameInputEvents_ShouldExecuteDataParserOnce()
+            {
+                var testScheduler = new TestScheduler();
+
+                //arrange
+                var target = new SerialPortDevice(_serialPortMock.Object, _dataParserMock.Object, testScheduler);
+
+                //act
+
+                target.ObserveDataReceived(10d);
+
+                //input events
+                _serialPortMock.Raise(port => port.DataReceived += null, "Test message 1");
+                _serialPortMock.Raise(port => port.DataReceived += null, "Test message 1");
+
+                //assert
+                _dataParserMock.Verify(x => x.Parse(It.IsAny<string>()), Times.Once);
+
+            }
+
+
             [Test]
             public void ForNoInputFor20sec_ShouldThrowTimeoutException()
             {
