@@ -114,7 +114,7 @@ namespace Rx.NET_Serial_Port_Example.Tests.SerialPortDeviceTests
                     testScheduler.AdvanceBy(TimeSpan.FromSeconds(5).Ticks);
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Assert.Fail("Exception was thrown but it shouldn't");
 

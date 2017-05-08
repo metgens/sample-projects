@@ -48,7 +48,6 @@ namespace Rx.NET_Serial_Port_Example
         private void OnDataReceived(string message)
         {
             var result = _dataParser.Parse(message);
-            Debug.WriteLine($"Value: '{result}' from raw message: '{message}'");
         }
 
     }
