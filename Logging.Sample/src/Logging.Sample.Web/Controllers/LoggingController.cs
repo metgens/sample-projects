@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Logging.Sample.Web.Controllers
@@ -17,8 +19,10 @@ namespace Logging.Sample.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var testMessage = "Logging example test";
-            _logger.LogInformation(testMessage);
+            var random = new Random().Next(0,1000);
+            var testMessage = $"Logging example test, with random number: {random}";
+            
+            _logger.LogInformation("Logging example test, with random number: {random}",random);
 
             return Ok(testMessage);
         }
